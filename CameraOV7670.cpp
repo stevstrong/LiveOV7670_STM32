@@ -6,16 +6,16 @@ bool CameraOV7670::init()
 {
   registers.init(); // init SCCB
   initIO();
-  delay(100); // give camera some time to run before starting setup
+  delay(250); // give camera some time to run before starting setup
   return setUpCamera();
 }
 
 void CameraOV7670::initIO()
 {
   // configure input pins
-  for(int i=0; i<8; i++) {
-    pinMode(inputPins[i],INPUT);
-  }
+  GPIOB->regs->CRH = 0x44444444; // PB8..15
+  pinMode(OV7670_VSYNC_PIN, INPUT);
+  pinMode(OV7670_HREF_PIN, INPUT);
 // init timer for XCLK generation
   pinMode(OV7670_XCLK_PIN, PWM);
   pwmWrite(OV7670_XCLK_PIN, 1);

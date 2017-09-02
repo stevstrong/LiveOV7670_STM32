@@ -7,16 +7,17 @@
 
 
 // STM32
-const int8_t inputPins[] = {PB3,PB4,PB5,PB8,PB9,PB10,PB11,PB12,PB13,PB14,PB15};
-const int8_t OV7670_XCLK_PIN = PA8;
+#define OV7670_XCLK_PIN PA8
 
 // vsync - PB5
 #ifndef OV7670_VSYNC
+#define OV7670_VSYNC_PIN PB5
 #define OV7670_VSYNC ((*idr) & BIT5) //#define OV7670_VSYNC ((*GPIOB_BASE).IDR & BIT5)
 #endif
 
 // href - PB3
 #ifndef OV7670_HREF
+#define OV7670_HREF_PIN PB3
 #define OV7670_HREF ((*idr) & BIT3) //(*GPIOB_BASE).IDR & BIT3)
 #endif
 
