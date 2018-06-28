@@ -5,7 +5,6 @@
 
 #include "CameraOV7670Registers.h"
 
-
 // STM32
 #define OV7670_XCLK_PIN PA8
 
@@ -45,13 +44,13 @@ public:
     RESOLUTION_QQVGA_160x120
   };
 
+  CameraOV7670Registers registers;
 private:
 
   Resolution resolution;
   PixelFormat pixelFormat;
   uint8_t internalClockPreScaler;
 
-  CameraOV7670Registers registers;
 
   void initIO();
   bool setUpCamera();

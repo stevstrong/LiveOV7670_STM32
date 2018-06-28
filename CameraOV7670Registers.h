@@ -7,7 +7,6 @@
 
 
 #include "Arduino.h"
-#include "Wire.h"
 #include "CameraOV7670RegisterDefinitions.h"
 
 

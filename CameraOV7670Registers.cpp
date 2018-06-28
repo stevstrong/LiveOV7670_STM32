@@ -3,11 +3,13 @@
 //
 
 #include "CameraOV7670Registers.h"
+#include <Wire.h>
 
+HardWire mWire(2);
 
 void CameraOV7670Registers::init()
 {
-  Wire.begin();
+  mWire.begin();
 }
 
 
@@ -23,8 +25,8 @@ void CameraOV7670Registers::setRegisters(const RegisterData *programMemPointer)
 {
   while (true) {
     RegisterData regData = {
-        addr: pgm_read_byte(&(programMemPointer->addr)),
-        val: pgm_read_byte(&(programMemPointer->val))
+        addr: (programMemPointer->addr),
+        val: (programMemPointer->val)
     };
     if (regData.addr == 0xFF) {
       break;
@@ -38,21 +40,21 @@ void CameraOV7670Registers::setRegisters(const RegisterData *programMemPointer)
 
 bool CameraOV7670Registers::setRegister(uint8_t addr, uint8_t val)
 {
-  Wire.beginTransmission(i2cAddress);
-  Wire.write(addr);
-  Wire.write(val);
-  return Wire.endTransmission() == 0;
+  mWire.beginTransmission(i2cAddress);
+  mWire.write(addr);
+  mWire.write(val);
+  return mWire.endTransmission() == 0;
 }
 
 
 uint8_t CameraOV7670Registers::readRegister(uint8_t addr)
 {
-  Wire.beginTransmission(i2cAddress);
-  Wire.write(addr);
-  Wire.endTransmission();
+  mWire.beginTransmission(i2cAddress);
+  mWire.write(addr);
+  mWire.endTransmission();
 
-  Wire.requestFrom(i2cAddress, (uint8_t)1);
-  return Wire.read();
+  mWire.requestFrom(i2cAddress, (uint8_t)1);
+  return mWire.read();
 }
 
 
@@ -72,7 +74,7 @@ void CameraOV7670Registers::setRegisterBitsAND(uint8_t addr, uint8_t bits)
 
 void CameraOV7670Registers::setDisablePixelClockDuringBlankLines()
 {
-  setRegister(REG_COM10, COM10_PCLK_HB);
+  setRegisterBitsOR(REG_COM10, COM10_PCLK_HB);
 }
 
 
