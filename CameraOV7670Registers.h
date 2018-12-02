@@ -8,12 +8,14 @@
 
 #include "Arduino.h"
 #include "CameraOV7670RegisterDefinitions.h"
+#include <Wire.h>
 
 
 class CameraOV7670Registers
 {
 private:
     const uint8_t i2cAddress = 0x21;
+	TwoWire &mWire = Wire;
 
 public:
     CameraOV7670Registers() {}

@@ -5,7 +5,6 @@
 #include "CameraOV7670Registers.h"
 #include <Wire.h>
 
-HardWire mWire(2);
 
 void CameraOV7670Registers::init()
 {

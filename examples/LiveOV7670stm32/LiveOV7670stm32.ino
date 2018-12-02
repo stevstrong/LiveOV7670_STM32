@@ -167,7 +167,7 @@ void setup()
   // enable the timer and corresponding DMA request
   DMA_Setup();
   TIMER_Setup();
-	SPI.setDataSize(DATA_SIZE_8BIT); // set to 8 bit mode
+	SPI.setDataSize(SPI_DATA_SIZE_8BIT); // set to 8 bit mode
 }
 //-----------------------------------------------------------------------------
 void blink(uint8_t br)
